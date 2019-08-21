@@ -6,35 +6,39 @@ import io.restassured.specification.RequestSpecification;
 
 import java.util.Map;
 
-public class RequestHeaderBuilder {
+public class RequestBuilder {
 
     private RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
     private final String baseUri = "https://sandbox.tradier.com/v1/";
 
-    public RequestHeaderBuilder(){
+    public RequestBuilder(){
         this.requestSpecBuilder.setBaseUri(this.baseUri)
                 .setAccept(ContentType.JSON)
-                .addHeader("Authorization","Bearer 9uiInA0AOqKESq4DjflqtDGwNUrG");
+                .addHeader("Authorization","Bearer "+ AccessToken.getAccessToken());
     }
 
-    public RequestSpecBuilder withBasePath(String basePath){
-        return this.requestSpecBuilder
+    public RequestBuilder withBasePath(String basePath){
+        this.requestSpecBuilder
                 .setBasePath(basePath);
+        return this;
     }
 
-    public RequestSpecBuilder withContentType(ContentType contentType){
-        return this.requestSpecBuilder
+    public RequestBuilder withContentType(ContentType contentType){
+        this.requestSpecBuilder
                 .setContentType(contentType);
+        return this;
     }
 
-    public RequestSpecBuilder withParams(Map<String, String> params){
-        return this.requestSpecBuilder
+    public RequestBuilder withParams(Map<String, String> params){
+        this.requestSpecBuilder
                 .addParams(params);
+        return this;
     }
 
-    public RequestSpecBuilder withQueryParams(Map<String, String> params){
-        return this.requestSpecBuilder
+    public RequestBuilder withQueryParams(Map<String, String> params){
+        this.requestSpecBuilder
                 .addQueryParams(params);
+        return this;
     }
 
     public RequestSpecification build(){

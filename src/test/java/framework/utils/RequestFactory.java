@@ -6,16 +6,15 @@ import io.restassured.specification.RequestSpecification;
 import java.util.Map;
 
 public class RequestFactory {
-    public RequestSpecification createHeaderMarketData(Boolean haveContentType, Map<String,String> params){
-        if(haveContentType){
-            return new RequestHeaderBuilder().withBasePath("markets")
-        }
-        return new RequestHeaderBuilder().build();
+
+    public RequestSpecification createGetRequest(String basePath, Map<String, String> queryParams){
+        return new RequestBuilder()
+                .withBasePath(basePath)
+                .withQueryParams(queryParams)
+                .build();
     }
-    public Response createResponseWithMarkets(RequestSpecification requestSpecification, String path){
-        Response response = new RequestFactory()
-                .createResponseWithMarkets(requestSpecification, "quotes");
-        return new RequestResponseBuilder(requestSpecification)
-                .isMarkets(path);
+
+    public Response createResponse(RequestSpecification requestSpecification, String path){
+        return new ResponseBuilder(requestSpecification, path).validateResponse();
     }
 }
