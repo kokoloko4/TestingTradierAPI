@@ -6,7 +6,7 @@ Feature: Market data
     Given I have an access token
 
   Scenario: Get quotes
-    When I send a get request with the symbols "AC" to the API
+    When I send a get request with the symbols "AC,VXX" to the API
     Then I get the quotes related to the symbols
 
   Scenario: Post quotes

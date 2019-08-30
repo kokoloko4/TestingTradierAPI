@@ -1,5 +1,6 @@
 package framework.utils;
 
+import io.restassured.authentication.AuthenticationScheme;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
@@ -13,7 +14,7 @@ public class RequestBuilder {
 
     public RequestBuilder(){
         this.requestSpecBuilder.setBaseUri(this.baseUri)
-                .setAccept(ContentType.JSON)
+                .setAccept(ContentType.JSON)//.setAuth()
                 .addHeader("Authorization","Bearer "+ AccessToken.getAccessToken());
     }
 

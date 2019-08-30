@@ -13,6 +13,6 @@ public class QuotesAssertionsSteps {
     public void IGetTheQuotesRelatedToTheSymbols(){
         Quote quote = Share.getShare("quote");
         Quote quoteResponse = Share.getShare("quotesResponse");
-        assertThat(quote.getSymbol(), equalTo(quoteResponse.getSymbol()));
+        assertThat("Quotes not found" ,quote.getSymbol(), equalTo(quoteResponse.getSymbol()));
     }
 }
