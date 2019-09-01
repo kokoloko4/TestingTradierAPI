@@ -2,19 +2,19 @@ Feature: Market data
   As user I want market information
   In order to perform market actions
 
-  Background:
-    Given I have an access token
-
   Scenario: Get quotes
-    When I send a get request with the symbols "AC" to the API
+    Given I have a quote
+    When I send a get request with the symbol "AC" to the API
     Then I get the quotes related to the symbols
 
   Scenario: Post quotes
-    When I send a post request with the symbols "AC" to the API
+    Given I have a quote
+    When I send a post request with the symbol "AC" to the API
     Then I get the quotes related to the symbols
 
   Scenario: Get an option chain
-    When I send a request to chain module with the symbol "AC" and the expiration date "2019-08-23"
+    Given I have
+    When I send a request to chain module with the symbol "VXX" and the expiration date "2019-05-17	"
     Then I get the options with the related symbol and expiration date
 
   Scenario:  Get an option's strike prices
