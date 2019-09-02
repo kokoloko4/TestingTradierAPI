@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+public class ResultWatchlists {
 
-public class Watchlists {
-
-    @JsonProperty("watchlist")
+    @JsonProperty("watchlists")
     @Getter @Setter
-    private List<Watchlist> watchlistList;
+    private Watchlists watchlists;
 }

@@ -6,9 +6,9 @@ import lombok.Setter;
 
 import java.util.List;
 
-public class Watchlists {
+public class ItemObjects {
 
-    @JsonProperty("watchlist")
+    @JsonProperty("item")
     @Getter @Setter
-    private List<Watchlist> watchlistList;
+    private List<Item> items;
 }

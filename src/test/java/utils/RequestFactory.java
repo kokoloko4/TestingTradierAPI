@@ -50,13 +50,16 @@ public class RequestFactory {
                     break;
             }
         }else if(module.equals(WATCHLISTS)){
+            requestBuilder.withBasePath(WATCHLISTS);
             switch (submodule){
                 case WL_ALL:
-                    break;
+                    return createResponse(requestBuilder.build(), "", "GET");
                 case WL_ONE:
-                    break;
+                    return createResponse(requestBuilder.build(), queryParams.get("id"), "GET");
                 case WL_CREATE:
-                    break;
+                    requestBuilder.withContentType(ContentType.URLENC)
+                            .withContentParams(requestBody);
+                    return createResponse(requestBuilder.build(), "", "POST");
                 case WL_DELETE:
                     break;
                 case WL_UPDATE:
