@@ -33,6 +33,10 @@ public class Quote {
     private long bid;
     @JsonProperty("ask")
     private long ask;
+    @JsonProperty("underlying")
+    private String underlying;
+    @JsonProperty("strike")
+    private long strike;
     @JsonProperty("change_percentage")
     private long changePercentage;
     @JsonProperty("average_volume")
@@ -59,4 +63,42 @@ public class Quote {
     private String askExch;
     @JsonProperty("ask_date")
     private long askDate;
+    @JsonProperty("open_interest")
+    private long openInterest;
+    @JsonProperty("contract_size")
+    private long contractSize;
+    @JsonProperty("expiration_date")
+    @Getter @Setter
+    private String expirationDate;
+    @JsonProperty("expiration_type")
+    private String expirationType;
+    @JsonProperty("option_type")
+    private String optionType;
+    @JsonProperty("root_symbol")
+    @Getter @Setter
+    private String rootSymbol;
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public String getRootSymbol() {
+        return rootSymbol;
+    }
+
+    public void setRootSymbol(String rootSymbol) {
+        this.rootSymbol = rootSymbol;
+    }
 }

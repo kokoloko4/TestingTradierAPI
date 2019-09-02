@@ -9,9 +9,9 @@ import utils.dataGenerator.QuoteGenerator;
 
 public class QuotesModuleSteps {
 
-    @Given("^I have a quote$")
-    public void iHaveAQuote(){
-        Quote quote = QuoteGenerator.generateQuote();
+    @Given("^I have a quote with symbol \"([^\"]*)\"$")
+    public void iHaveAQuote(String symbol){
+        Quote quote = QuoteGenerator.generateQuote(symbol);
         Share.setShare("quote", quote);
     }
 
@@ -20,8 +20,8 @@ public class QuotesModuleSteps {
         Share.setShare("quotes", QuotesHelper.getQuotes("GET", symbol));
     }
 
-    @When("I send a post request with the symbol \"([^\"]*)\" to the API$")
-    public void ISendAPostRequestWithTheSymbolsToTheAPI(String symbol){
+    @When("^I send a post request with the symbol \"([^\"]*)\" to the API$")
+    public void iSendAPostRequestWithTheSymbolsToTheAPI(String symbol){
         Share.setShare("quotes", QuotesHelper.postQuotes("POST", symbol));
     }
 }

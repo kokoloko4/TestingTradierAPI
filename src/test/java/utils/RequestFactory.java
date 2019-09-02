@@ -20,35 +20,32 @@ public class RequestFactory {
                                   Map<String, String> requestBody){
         RequestBuilder requestBuilder = new RequestBuilder(baseURI);
         if(module.equals(MARKET_DATA)){
-            requestBuilder.withBasePath(MARKET_DATA);
+            requestBuilder.withBasePath(MARKET_DATA).withQueryParams(queryParams);
             switch (submodule){
                 case MK_QUOTES:
-                    if(httpRequest.equals("GET")){
-                        requestBuilder.withQueryParams(queryParams);
-                    }else if(httpRequest.equals("POST")){
+                    if(httpRequest.equals("POST")){
                         requestBuilder.withContentType(ContentType.URLENC)
                                 .withContentParams(requestBody);
                     }
                     return createResponse(requestBuilder.build(), MK_QUOTES, httpRequest);
                 case MK_OPTIONS_CHAINS:
-                        requestBuilder.withQueryParams(queryParams);
-                        return createResponse(requestBuilder.build(), MK_OPTIONS_CHAINS, httpRequest);
+                    return createResponse(requestBuilder.build(), MK_OPTIONS_CHAINS, httpRequest);
                 case MK_OPTIONS_STRIKES:
-                    break;
+                    return createResponse(requestBuilder.build(), MK_OPTIONS_STRIKES, httpRequest);
                 case MK_OPTIONS_EXPIRATIONS:
-                    break;
+                    return createResponse(requestBuilder.build(), MK_OPTIONS_EXPIRATIONS, httpRequest);
                 case MK_HISTORICAL_PRICES:
-                    break;
+                    return createResponse(requestBuilder.build(), MK_HISTORICAL_PRICES, httpRequest);
                 case MK_TIME_SALES:
-                    break;
+                    return createResponse(requestBuilder.build(), MK_TIME_SALES, httpRequest);
                 case MK_CLOCK:
-                    break;
+                    return createResponse(requestBuilder.build(), MK_CLOCK, httpRequest);
                 case MK_CALENDAR:
-                    break;
+                    return createResponse(requestBuilder.build(), MK_CALENDAR, httpRequest);
                 case MK_SYMBOLS:
-                    break;
+                    return createResponse(requestBuilder.build(), MK_SYMBOLS, httpRequest);
                 case MK_COMPANIES:
-                    break;
+                    return createResponse(requestBuilder.build(), MK_COMPANIES, httpRequest);
                 default:
                     break;
             }

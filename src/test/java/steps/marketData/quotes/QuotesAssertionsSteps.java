@@ -10,10 +10,10 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class QuotesAssertionsSteps {
 
-    @Then("I get the quotes related to the symbols")
-    public void IGetTheQuotesRelatedToTheSymbols(){
+    @Then("^I get the quotes related to the symbols$")
+    public void iGetTheQuotesRelatedToTheSymbols(){
         Quote quote = Share.getShare("quote");
         OneQuote quoteResponse = Share.getShare("quotes");
-        assertThat(quote.getSymbol(), equalTo(quoteResponse.getQuotes().getSymbol()));
+        assertThat("The symbol quote is different", quote.getSymbol(), equalTo(quoteResponse.getQuotes().getSymbol()));
     }
 }
