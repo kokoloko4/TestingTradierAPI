@@ -1,12 +1,14 @@
 package entities.marketDataEntities.clock;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 public class Clock {
 
     @JsonProperty("date")
     private String date;
     @JsonProperty("description")
+    @Getter
     private String description;
     @JsonProperty("state")
     private String state;
@@ -16,8 +18,4 @@ public class Clock {
     private String nextChange;
     @JsonProperty("next_state")
     private String nextState;
-
-    public String getDescription() {
-        return description;
-    }
 }

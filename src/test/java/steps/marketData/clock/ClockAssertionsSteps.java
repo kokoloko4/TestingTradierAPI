@@ -12,6 +12,7 @@ public class ClockAssertionsSteps {
     public void iGetTheTimeInformationAboutTheMarket(){
         String description = Share.getShare("opens");
         Clock clock = Share.getShare("clock");
-        assertThat("The description is not the same", description.equals(clock.getDescription()));
+        assertThat(String.format("The description expected was %s and the obtained was %s", description, clock.getDescription())
+                , description.equals(clock.getDescription()));
     }
 }

@@ -7,7 +7,8 @@ import lombok.Setter;
 public class Quote {
 
     @JsonProperty("symbol")
-    @Getter @Setter
+    @Getter
+    @Setter
     private String symbol;
     @JsonProperty("description")
     private String description;
@@ -68,7 +69,8 @@ public class Quote {
     @JsonProperty("contract_size")
     private long contractSize;
     @JsonProperty("expiration_date")
-    @Getter @Setter
+    @Getter
+    @Setter
     private String expirationDate;
     @JsonProperty("expiration_type")
     private String expirationType;
@@ -77,28 +79,7 @@ public class Quote {
     @JsonProperty("root_symbol")
     @Getter @Setter
     private String rootSymbol;
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public String getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public String getRootSymbol() {
-        return rootSymbol;
-    }
-
-    public void setRootSymbol(String rootSymbol) {
-        this.rootSymbol = rootSymbol;
-    }
+    @JsonProperty("root_symbols")
+    @Getter @Setter
+    private String rootSymbols;
 }

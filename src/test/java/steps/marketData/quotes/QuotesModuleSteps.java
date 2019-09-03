@@ -2,17 +2,17 @@ package steps.marketData.quotes;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import entities.marketDataEntities.quotes.Quote;
+import entities.marketDataEntities.quotes.Quotes;
 import helpers.QuotesHelper;
 import utils.Share;
 import utils.dataGenerator.QuoteGenerator;
 
 public class QuotesModuleSteps {
 
-    @Given("^I have a quote with symbol \"([^\"]*)\"$")
-    public void iHaveAQuote(String symbol){
-        Quote quote = QuoteGenerator.generateQuote(symbol);
-        Share.setShare("quote", quote);
+    @Given("^I have a quotes with symbols \"([^\"]*)\"$")
+    public void iHaveAQuote(String symbols){
+        Quotes quotes = QuoteGenerator.generateQuotes(symbols);
+        Share.setShare("quote", quotes);
     }
 
     @When("^I send a get request with the symbol \"([^\"]*)\" to the API$")

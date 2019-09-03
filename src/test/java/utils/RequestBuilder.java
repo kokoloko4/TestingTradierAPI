@@ -12,9 +12,12 @@ public class RequestBuilder {
     private RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
 
     public RequestBuilder(String baseUri){
+        ReadProperties readProperties = new ReadProperties("data");
+        readProperties.openFile();
         this.requestSpecBuilder.setBaseUri(baseUri)
                 .setAccept(ContentType.JSON)
-                .setAuth(RestAssured.oauth2(AccessToken.getAccessToken()));
+                .setAuth(RestAssured.oauth2(readProperties.getProperty("token")));
+        readProperties.closeFile();
     }
 
     public RequestBuilder withBasePath(String basePath){

@@ -8,8 +8,4 @@ public class Strikes {
     @JsonProperty("strikes")
     @Getter
     private Strike strikes;
-
-    public Strike getStrikes() {
-        return strikes;
-    }
 }

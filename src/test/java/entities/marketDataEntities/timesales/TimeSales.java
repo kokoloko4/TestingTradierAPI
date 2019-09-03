@@ -1,10 +1,13 @@
 package entities.marketDataEntities.timesales;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 public class TimeSales {
 
     @JsonProperty("time")
+    @Getter @Setter
     private String time;
     @JsonProperty("timestamp")
     private long timeStamp;
@@ -22,12 +25,4 @@ public class TimeSales {
     private long volume;
     @JsonProperty("vwap")
     private long vwap;
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getTime() {
-        return time;
-    }
 }

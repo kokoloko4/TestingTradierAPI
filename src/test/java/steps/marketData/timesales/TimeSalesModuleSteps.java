@@ -2,17 +2,18 @@ package steps.marketData.timesales;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import entities.marketDataEntities.timesales.TimeSales;
 import helpers.TimeSalesHelper;
 import utils.Share;
-import utils.dataGenerator.TimeSalesGenerator;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TimeSalesModuleSteps {
 
     @Given("^I have a time and sales of \"([^\"]*)\"$")
     public void iHaveTimeSales(String symbol){
-        TimeSales timeSales = TimeSalesGenerator.getTimeSales("2019-08-30T16:02:00");
-        Share.setShare("timeSales", timeSales);
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        Share.setShare("timeSales", formatDate.format(new Date()));
     }
 
     @When("^I send a request to timesales module with the symbol \"([^\"]*)\"$")

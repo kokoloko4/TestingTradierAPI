@@ -6,11 +6,13 @@ import helpers.HistoricalPricesHelper;
 import utils.Share;
 import utils.dataGenerator.MonthlyDatesGenerator;
 
+import java.util.List;
+
 public class HistoricalModuleSteps {
 
-    @Given("^I have a list of dates monthly of \"([^\"]*)\"$")
-    public void iHaveListDatesMonthly(String symbol){
-        String[] dates = MonthlyDatesGenerator.getDates();
+    @Given("^I have a list of dates monthly of symbol$")
+    public void iHaveListDatesMonthly(List<String> data){
+        String[] dates = MonthlyDatesGenerator.getDates(data);
         Share.setShare("dates", dates);
     }
 

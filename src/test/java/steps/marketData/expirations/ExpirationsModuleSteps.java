@@ -6,11 +6,13 @@ import helpers.ExpirationsHelper;
 import utils.Share;
 import utils.dataGenerator.ExpirationsDateGenerator;
 
+import java.util.List;
+
 public class ExpirationsModuleSteps {
 
-    @Given("^I have a list of expirations of \"([^\"]*)\"$")
-    public void iHaveAListExpirations(String symbol){
-        String[] expirations = ExpirationsDateGenerator.getExpirations();
+    @Given("^I have a list of expirations of symbol$")
+    public void iHaveAListExpirations(List<String> data){
+        String[] expirations = ExpirationsDateGenerator.getExpirations(data);
         Share.setShare("expirations", expirations);
     }
 

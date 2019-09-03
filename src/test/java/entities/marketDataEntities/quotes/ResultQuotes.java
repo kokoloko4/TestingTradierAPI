@@ -1,17 +1,12 @@
 package entities.marketDataEntities.quotes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 public class ResultQuotes {
 
     @JsonProperty("quotes")
-    private OneQuote quotes;
-
-    public OneQuote getQuotes() {
-        return quotes;
-    }
-
-    public void setQuotes(OneQuote quotes) {
-        this.quotes = quotes;
-    }
+    @Getter @Setter
+    private Quotes quotes;
 }

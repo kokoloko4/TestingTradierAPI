@@ -12,7 +12,9 @@ public class CalendarAssertionsSteps {
     public void iGetTheCalendarForTheGivenMonth(){
         Calendar calendar = Share.getShare("calendar");
         Calendar calendarResponse = Share.getShare("calendarResponse");
-        assertThat("The month or year does not match", calendar.getMonth().equals(calendarResponse.getMonth())
+        assertThat(String.format("The month and year expected were %s-%s. The obtained were %s-%s.", calendar.getMonth(),
+                calendar.getYear(), calendarResponse.getMonth(), calendarResponse.getYear()),
+                calendar.getMonth().equals(calendarResponse.getMonth())
             && calendar.getYear().equals(calendarResponse.getYear()));
     }
 }

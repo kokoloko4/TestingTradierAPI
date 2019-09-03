@@ -13,7 +13,7 @@ public class ExpirationsAssertionsSteps {
     public void iGetTheExpirationDatesRelatedToTheSymbol(){
         String[] expirations = Share.getShare("expirations");
         Date expirationsResponse = Share.getShare("expirationsResponse");
-        assertThat("The dates does not match", ExpirationsHelper.validateDates(expirations,
-                expirationsResponse.getExpirations()));
+        assertThat("The dates does not match",
+                ExpirationsHelper.validateDates(expirations, expirationsResponse.getExpirations()));
     }
 }

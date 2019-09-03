@@ -1,13 +1,14 @@
 package utils.dataGenerator;
 
+import java.util.List;
+
 public class MonthlyDatesGenerator {
 
-    private static String[] dates = {
-            "2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01",
-            "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01"
-    };
-
-    public static String[] getDates() {
+    public static String[] getDates(List<String> data) {
+        String dates[] = new String[data.size()-1];
+        for(int i = 1; i < data.size(); i++){
+            dates[i-1] = data.get(i);
+        }
         return dates;
     }
 }

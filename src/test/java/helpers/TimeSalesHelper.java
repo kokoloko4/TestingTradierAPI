@@ -3,6 +3,7 @@ package helpers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.marketDataEntities.timesales.Data;
 import entities.marketDataEntities.timesales.Series;
+import entities.marketDataEntities.timesales.TimeSales;
 import io.restassured.response.Response;
 import utils.RequestFactory;
 
@@ -28,5 +29,17 @@ public class TimeSalesHelper {
             e.printStackTrace();
         }
         return resultSeries.getSeries();
+    }
+
+    public static boolean verifyTimeIsActualDay(String currentDate, Data data){
+        boolean match = true;
+        int cont = 0;
+        while(cont < data.getTimesales().size() && match){
+            if(!data.getTimesales().get(cont).getTime().split("T")[0].equals(currentDate)){
+                match = false;
+            }
+            cont++;
+        }
+        return match;
     }
 }
