@@ -3,7 +3,10 @@ package utils;
 import io.restassured.filter.log.ErrorLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSenderOptions;
 import io.restassured.specification.RequestSpecification;
+import org.testng.Assert;
 
 import java.util.Map;
 
@@ -11,6 +14,8 @@ import static io.restassured.RestAssured.given;
 import static modules.APIModule.MARKET_DATA;
 import static modules.APIModule.WATCHLISTS;
 import static org.apache.http.HttpStatus.SC_OK;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static submodules.APISubmodule.*;
 
 public class RequestFactory {
@@ -94,18 +99,30 @@ public class RequestFactory {
     }
 
     private Response getRequest(RequestSpecification requestSpecification, String path){
-        return given().spec(requestSpecification).when().get(path).then().statusCode(SC_OK).extract().response();
+        Response response = given().spec(requestSpecification).when().get(path);
+        statusCode200(response);
+        return response.then().extract().response();
     }
 
     private Response postRequest(RequestSpecification requestSpecification, String path){
-        return given().spec(requestSpecification).when().post(path).then().statusCode(SC_OK).extract().response();
+        Response response = given().spec(requestSpecification).when().post(path);
+        statusCode200(response);
+        return response.then().extract().response();
     }
 
     private Response putRequest(RequestSpecification requestSpecification, String path){
-        return given().spec(requestSpecification).when().put(path).then().statusCode(SC_OK).extract().response();
+        Response response = given().spec(requestSpecification).when().put(path);
+        statusCode200(response);
+        return response.then().extract().response();
     }
 
     private Response deleteRequest(RequestSpecification requestSpecification, String path){
-        return given().spec(requestSpecification).when().delete(path).then().statusCode(SC_OK).extract().response();
+        Response response = given().spec(requestSpecification).when().delete(path);
+        statusCode200(response);
+        return response.then().extract().response();    }
+
+    private void statusCode200(Response response){
+        assertThat(String.format("The expected code is %d but was %d", response.getStatusCode(), SC_OK),
+                response.getStatusCode(), equalTo(SC_OK));
     }
 }
