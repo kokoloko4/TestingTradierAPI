@@ -11,9 +11,8 @@ public class ExpirationsAssertionsSteps {
 
     @Then("^I get the expiration dates related to the symbol$")
     public void iGetTheExpirationDatesRelatedToTheSymbol(){
-        String[] expirations = Share.getShare("expirations");
-        Date expirationsResponse = Share.getShare("expirationsResponse");
         assertThat("The dates does not match",
-                ExpirationsHelper.validateDates(expirations, expirationsResponse.getExpirations()));
+                ExpirationsHelper.validateDates(Share.getShare("expirations"),
+                        ((Date)Share.getShare("expirationsResponse")).getExpirations()));
     }
 }

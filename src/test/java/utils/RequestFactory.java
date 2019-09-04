@@ -1,5 +1,6 @@
 package utils;
 
+import io.restassured.filter.log.ErrorLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -30,36 +31,36 @@ public class RequestFactory {
                     if(httpRequest.equals("POST")){
                         requestBuilder.withContentType(ContentType.URLENC)
                                 .withContentParams(requestBody);
-                    }else{
-                        requestBuilder.withQueryParams(queryParams);
+                        return postRequest(requestBuilder.build(), MK_QUOTES);
                     }
-                    return createResponse(requestBuilder.build(), MK_QUOTES, httpRequest);
+                    requestBuilder.withQueryParams(queryParams);
+                    return getRequest(requestBuilder.build(), MK_QUOTES);
                 case MK_OPTIONS_CHAINS:
                     requestBuilder.withQueryParams(queryParams);
-                    return createResponse(requestBuilder.build(), MK_OPTIONS_CHAINS, httpRequest);
+                    return getRequest(requestBuilder.build(), MK_OPTIONS_CHAINS);
                 case MK_OPTIONS_STRIKES:
                     requestBuilder.withQueryParams(queryParams);
-                    return createResponse(requestBuilder.build(), MK_OPTIONS_STRIKES, httpRequest);
+                    return getRequest(requestBuilder.build(), MK_OPTIONS_STRIKES);
                 case MK_OPTIONS_EXPIRATIONS:
                     requestBuilder.withQueryParams(queryParams);
-                    return createResponse(requestBuilder.build(), MK_OPTIONS_EXPIRATIONS, httpRequest);
+                    return getRequest(requestBuilder.build(), MK_OPTIONS_EXPIRATIONS);
                 case MK_HISTORICAL_PRICES:
                     requestBuilder.withQueryParams(queryParams);
-                    return createResponse(requestBuilder.build(), MK_HISTORICAL_PRICES, httpRequest);
+                    return getRequest(requestBuilder.build(), MK_HISTORICAL_PRICES);
                 case MK_TIME_SALES:
                     requestBuilder.withQueryParams(queryParams);
-                    return createResponse(requestBuilder.build(), MK_TIME_SALES, httpRequest);
+                    return getRequest(requestBuilder.build(), MK_TIME_SALES);
                 case MK_CLOCK:
-                    return createResponse(requestBuilder.build(), MK_CLOCK, httpRequest);
+                    return getRequest(requestBuilder.build(), MK_CLOCK);
                 case MK_CALENDAR:
                     requestBuilder.withQueryParams(queryParams);
-                    return createResponse(requestBuilder.build(), MK_CALENDAR, httpRequest);
+                    return getRequest(requestBuilder.build(), MK_CALENDAR);
                 case MK_SYMBOLS:
                     requestBuilder.withQueryParams(queryParams);
-                    return createResponse(requestBuilder.build(), MK_SYMBOLS, httpRequest);
+                    return getRequest(requestBuilder.build(), MK_SYMBOLS);
                 case MK_COMPANIES:
                     requestBuilder.withQueryParams(queryParams);
-                    return createResponse(requestBuilder.build(), MK_COMPANIES, httpRequest);
+                    return getRequest(requestBuilder.build(), MK_COMPANIES);
                 default:
                     break;
             }
@@ -67,24 +68,24 @@ public class RequestFactory {
             requestBuilder.withBasePath(WATCHLISTS);
             switch (submodule){
                 case WL_ALL:
-                    return createResponse(requestBuilder.build(), "", "GET");
+                    return getRequest(requestBuilder.build(), "");
                 case WL_ONE:
-                    return createResponse(requestBuilder.build(), queryParams.get("watchlist_id"), httpRequest);
+                    return getRequest(requestBuilder.build(), queryParams.get("watchlist_id"));
                 case WL_CREATE:
                     requestBuilder.withContentType(ContentType.URLENC)
                             .withContentParams(requestBody);
-                    return createResponse(requestBuilder.build(), "", "POST");
+                    return postRequest(requestBuilder.build(), "");
                 case WL_DELETE:
-                    return createResponse(requestBuilder.build(), queryParams.get("watchlist_id"), httpRequest);
+                    return deleteRequest(requestBuilder.build(), queryParams.get("watchlist_id"));
                 case WL_UPDATE:
                     requestBuilder.withContentType(ContentType.URLENC).withContentParams(requestBody);
-                    return createResponse(requestBuilder.build(), queryParams.get("watchlist_id"), httpRequest);
+                    return putRequest(requestBuilder.build(), queryParams.get("watchlist_id"));
                 case WL_ADD_SYMBOLS:
                     requestBuilder.withContentType(ContentType.URLENC).withContentParams(requestBody);
-                    return createResponse(requestBuilder.build(), queryParams.get("watchlist_id")+"/symbols", httpRequest);
+                    return postRequest(requestBuilder.build(), queryParams.get("watchlist_id")+"/symbols");
                 case WL_REMOVE_SYMBOL:
-                    return createResponse(requestBuilder.build(), queryParams.get("watchlist_id")+"/symbols"
-                            +queryParams.get("symbol"), httpRequest);
+                    return deleteRequest(requestBuilder.build(), queryParams.get("watchlist_id")+"/symbols"
+                            +queryParams.get("symbol"));
                 default:
                     break;
             }
@@ -92,32 +93,19 @@ public class RequestFactory {
         return null;
     }
 
-    private Response createResponse(RequestSpecification requestSpecification, String path, String httpRequest){
-        Response response = null;
-        RequestSpecification responseSpec = given()
-                .spec(requestSpecification);
-        switch (httpRequest){
-            case "GET":
-                response = responseSpec.get(path);
-                break;
-            case "POST":
-                response = responseSpec.post(path);
-                break;
-            case "PUT":
-                response = responseSpec.put(path);
-                break;
-            case "DELETE":
-                response = responseSpec.delete(path);
-                break;
-        }
-        try{
-            response.then()
-                    .statusCode(SC_OK)
-                    .extract()
-                    .response();
-        }catch(Exception e){
-            System.out.println("The response obtained is empty");
-        }
-        return response;
+    private Response getRequest(RequestSpecification requestSpecification, String path){
+        return given().spec(requestSpecification).when().get(path).then().statusCode(SC_OK).extract().response();
+    }
+
+    private Response postRequest(RequestSpecification requestSpecification, String path){
+        return given().spec(requestSpecification).when().post(path).then().statusCode(SC_OK).extract().response();
+    }
+
+    private Response putRequest(RequestSpecification requestSpecification, String path){
+        return given().spec(requestSpecification).when().put(path).then().statusCode(SC_OK).extract().response();
+    }
+
+    private Response deleteRequest(RequestSpecification requestSpecification, String path){
+        return given().spec(requestSpecification).when().delete(path).then().statusCode(SC_OK).extract().response();
     }
 }

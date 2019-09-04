@@ -11,8 +11,7 @@ public class HistoricalAssertionsSteps {
 
     @Then("^I get a list with the history related to the company$")
     public void iGetListWithTheHistoryRelatesdToTheCompany(){
-        String[] days = Share.getShare("dates");
-        History dates = Share.getShare("days");
-        assertThat("The dates does not match", HistoricalPricesHelper.validateDates(days, dates.getDays()));
+        assertThat("The dates does not match", HistoricalPricesHelper.validateDates(Share.getShare("dates"),
+                ((History)Share.getShare("days")).getDays()));
     }
 }

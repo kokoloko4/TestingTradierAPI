@@ -1,5 +1,6 @@
 package helpers;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.marketDataEntities.timesales.Data;
 import entities.marketDataEntities.timesales.Series;
@@ -22,6 +23,7 @@ public class TimeSalesHelper {
         Response response = new RequestFactory().createRequest(httpRequest, MARKET_DATA, MK_TIME_SALES
                 , queryParams, null);
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         Series resultSeries = null;
         try {
             resultSeries = mapper.readValue(response.getBody().asString(), Series.class);

@@ -12,9 +12,10 @@ public class ChainAssertionsSteps {
 
     @Then("^I get the options with the related symbol and expiration date$")
     public void iGetTheOptionsWithTheRelatedSymbolAndExpirationDate() {
-        Quote option = Share.getShare("option");
-        Options options = Share.getShare("options");
         assertThat("There is a option that have not the symbol or expiration date",
-                OptionsHelper.verifyOptions(option, options.getOptions()));
+                OptionsHelper.verifyOptions(Share.getShare("option"),
+                        ((Options)Share.getShare("options")).getOptions()));
     }
+
+
 }

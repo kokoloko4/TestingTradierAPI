@@ -12,9 +12,7 @@ public class QuotesAssertionsSteps {
 
     @Then("^I get the quotes related to the symbols$")
     public void iGetTheQuotesRelatedToTheSymbols(){
-        Quotes quotes = Share.getShare("quote");
-        Quotes quoteResponse = Share.getShare("quotes");
         assertThat("The quotes do not contain the symbols expected",
-                QuotesHelper.responseContainsSymbols(quotes, quoteResponse));
+                QuotesHelper.responseContainsSymbols(Share.getShare("quote"), Share.getShare("quotes")));
     }
 }

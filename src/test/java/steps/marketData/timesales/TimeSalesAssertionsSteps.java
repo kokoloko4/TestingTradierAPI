@@ -12,9 +12,8 @@ public class TimeSalesAssertionsSteps {
 
     @Then("^I get a list of timesales information$")
     public void iGetAListOfTimesalesInformation(){
-        String timeSales = Share.getShare("timeSales");
-        Data data = Share.getShare("seriesResponse");
         assertThat("The timesales are not from today",
-                TimeSalesHelper.verifyTimeIsActualDay(timeSales, data));
+                TimeSalesHelper.verifyTimeIsActualDay(
+                        Share.getShare("timeSales"), Share.getShare("seriesResponse")));
     }
 }

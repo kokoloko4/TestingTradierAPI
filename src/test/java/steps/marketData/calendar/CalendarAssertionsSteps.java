@@ -10,11 +10,14 @@ public class CalendarAssertionsSteps {
 
     @Then("^I get the calendar for the given month$")
     public void iGetTheCalendarForTheGivenMonth(){
-        Calendar calendar = Share.getShare("calendar");
-        Calendar calendarResponse = Share.getShare("calendarResponse");
-        assertThat(String.format("The month and year expected were %s-%s. The obtained were %s-%s.", calendar.getMonth(),
-                calendar.getYear(), calendarResponse.getMonth(), calendarResponse.getYear()),
-                calendar.getMonth().equals(calendarResponse.getMonth())
-            && calendar.getYear().equals(calendarResponse.getYear()));
+        assertThat(String.format("The month and year expected were %s-%s. The obtained were %s-%s.",
+                ((Calendar)Share.getShare("calendar")).getMonth(),
+                ((Calendar)Share.getShare("calendar")).getYear(),
+                ((Calendar)Share.getShare("calendarResponse")).getMonth(),
+                ((Calendar)Share.getShare("calendarResponse")).getYear()),
+                ((Calendar)Share.getShare("calendar")).getMonth().equals(
+                        ((Calendar)Share.getShare("calendarResponse")).getMonth())
+            && ((Calendar)Share.getShare("calendar")).getYear().equals(
+                    ((Calendar)Share.getShare("calendarResponse")).getYear()));
     }
 }
