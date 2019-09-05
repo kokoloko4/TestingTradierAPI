@@ -1,4 +1,4 @@
-package steps.watchlist.watchlists;
+package steps.watchlist;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
