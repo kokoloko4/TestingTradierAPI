@@ -2,11 +2,13 @@ Feature: Market data
   As user I want market information
   In order to perform market actions
 
+  @Quotes_submodule
   Scenario: Post quotes
     Given I have a quotes with symbols "AC,AAPL"
     When I send a post request with the symbol "AC,AAPL" to the API
     Then I get the quotes related to the symbols
 
+  @Quotes_submodule
   Scenario: Get quotes
     Given I have a quotes with symbols "AC"
     When I send a get request with the symbol "AC" to the API
